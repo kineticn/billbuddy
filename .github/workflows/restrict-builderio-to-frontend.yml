@@ -1,0 +1,31 @@
+name: Restrict Builder.io PRs to /frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  restrict-builderio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Get changed files
+        id: files
+        run: |
+          echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})" >> $GITHUB_ENV
+
+      - name: Fail if changes outside /frontend
+        run: |
+          for file in $CHANGED_FILES; do
+            if [[ ! "$file" =~ ^frontend/ ]]; then
+              echo "Error: Builder.io PRs must only modify files in /frontend. Changed: $file" >&2
+              exit 1
+            fi
+          done
+
+      - name: Success message
+        if: success()
+        run: echo "All changed files are within /frontend. PR passes restriction."
