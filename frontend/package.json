@@ -1,0 +1,13 @@
+{
+  "name": "billbuddy-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "lint": "echo 'No linter configured yet' && exit 0",
+    "test-golden": "echo 'No golden tests yet' && exit 0"
+  },
+  "dependencies": {
+    "vite": "^5.0.0"
+  }
+}

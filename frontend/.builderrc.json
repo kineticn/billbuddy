@@ -1,0 +1,4 @@
+{
+  "outputPath": "frontend/src/builder",
+  "defaultTarget": "flutter"
+}

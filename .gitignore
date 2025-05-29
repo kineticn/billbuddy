@@ -35,6 +35,7 @@ dist/
 coverage/
 .env
 .env.*
+!/frontend/.env.frontend.sample
 .nyc_output/
 yarn-debug.log*
 yarn-error.log*
