@@ -1,0 +1,16 @@
+{
+  "light": {
+    "color-primary": "#2152A3",
+    "color-accent": "#21B573",
+    "color-bg": "#F6FAFD",
+    "color-surface": "#FFFFFF",
+    "color-error": "#E74C3C"
+  },
+  "dark": {
+    "color-primary": "#4A90E2",
+    "color-accent": "#6DD5A6",
+    "color-bg": "#0F111A",
+    "color-surface": "#1C1F2B",
+    "color-error": "#CF3D2E"
+  }
+}
