@@ -1,10 +1,28 @@
 # BillBuddy Frontend (Builder.io UI/UX)
 
+<!-- Test commit for backend sync workflow -->
+
 This folder is dedicated to all UI/UX work for the BillBuddy project, including:
 - Builder.io AI-generated pages and components
 - Figma design exports
 - UI assets (images, icons, etc.)
 - Design documentation and prompts
+
+## How to run just the UI (Frontend)
+
+1. Open a terminal and navigate to this directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Visit the local URL provided by Vite (usually http://localhost:5173)
 
 ## Instructions for Builder.io
 - Use this folder as the root for all frontend and UI/UX code.
