@@ -1,0 +1,55 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.log
+*.lock
+*.pyc
+*.swp
+*.swo
+*.DS_Store
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# Node/TypeScript
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+.nyc_output/
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# macOS
+.DS_Store
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Others
+*.orig
+*.rej

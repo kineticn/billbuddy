@@ -1,0 +1,17 @@
+# BillBuddy
+
+BillBuddy is a high-trust FinTech application that consolidates and automates household bill payments across mobile (iOS/Android) and web platforms. Built with Flutter for a unified codebase, BillBuddy enables seamless onboarding, OCR-based bill scanning, automated payments via Plaid, and a tiered pricing model. AI orchestration (WindSurf-AI) is used for code generation, testing, and deployment, minimizing manual coding and maximizing development velocity.
+
+## Tech Stack
+- **Flutter (Dart)**: Cross-platform mobile/web app
+- **NestJS (Node/TypeScript)**: Backend API
+- **Plaid**: Bank account integration
+- **CI/CD**: GitHub Actions
+- **AI Orchestration**: WindSurf-AI
+
+## Development Workflow
+- All code changes via PRs; main branch protected by CI
+- AI agents generate, test, and deploy code; developers review and debug
+- Every feature must include unit + integration tests
+- Secure coding enforced (no hard-coded secrets; use ENV vars)
+- Linting and code comments required

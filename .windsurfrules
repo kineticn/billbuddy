@@ -1,0 +1,28 @@
+# WindSurf-AI Workspace Rules for BillBuddy
+
+## Project Structure
+- Use standard Flutter project structure for mobile/web app (lib/, test/, assets/, etc.)
+- Use standard NestJS structure for backend (src/, test/, config/, etc.)
+- Name Dart/Flutter files in snake_case; classes in PascalCase
+- Name TypeScript files in kebab-case; classes in PascalCase
+
+## Coding Standards
+- All code must be linted (flutter_lints, eslint, prettier)
+- All public functions/classes require doc comments
+- No hard-coded secrets; use environment variables and .env files
+- Follow OWASP secure coding best practices
+
+## Testing Requirements
+- Every feature must include unit and integration tests
+- Test coverage must not decrease on PRs
+- Use mocking for external dependencies in tests
+
+## PR & CI/CD
+- All changes must be submitted via Pull Request
+- Main branch is protected: requires PR approval and CI pass
+- CI runs lint, tests, and security checks
+
+## AI Agent Workflow
+- AI agents generate, test, and deploy code
+- Human review required for all PRs
+- All generated code must comply with these rules
