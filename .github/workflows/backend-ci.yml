@@ -76,6 +76,13 @@ jobs:
           name: backend-jest-coverage
           path: billbuddy/backend/coverage/
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: backend/coverage/lcov.info
+          flags: backend
+          fail_ci_if_error: false
+
       - name: Upload Jest Results
         uses: actions/upload-artifact@v4
         with:
