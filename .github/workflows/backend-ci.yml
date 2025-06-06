@@ -47,27 +47,27 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd billbuddy/backend
+          cd backend
           npm ci
 
       - name: Generate Prisma client
         run: |
-          cd billbuddy/backend
+          cd backend
           npx prisma generate
 
       - name: Run Prisma migrations
         run: |
-          cd billbuddy/backend
+          cd backend
           npx prisma migrate deploy
 
       - name: Run lint
         run: |
-          cd billbuddy/backend
+          cd backend
           npx eslint .
 
       - name: Run tests with coverage
         run: |
-          cd billbuddy/backend
+          cd backend
           npx jest --runInBand --coverage --outputFile=jest-results.json --json
 
       - name: Upload Jest Coverage
