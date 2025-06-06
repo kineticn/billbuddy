@@ -22,3 +22,4 @@ Please refer to that repository for all UI, Builder.io, and frontend-related log
 - Every feature must include unit + integration tests
 - Secure coding enforced (no hard-coded secrets; use ENV vars)
 - Linting and code comments required
+
