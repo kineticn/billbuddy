@@ -1,4 +1,4 @@
-// Trivial comment to trigger Codecov backend coverage visibility test
+// Another trivial comment to verify Codecov backend coverage mapping
 const express = require('express');
 const { authenticate } = require('./auth');
 const { households } = require('./households');
