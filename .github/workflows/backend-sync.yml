@@ -1,17 +1,18 @@
+# NOTE: The backend-sync workflow was previously used to notify WindSurf AI of frontend changes via a webhook, but is currently disabled due to lack of a valid endpoint and secrets.
+# To re-enable, add a job here that performs the desired notification.
+
 name: Backend sync on frontend change
 on:
   push:
     paths:
       - 'frontend/**'
-jobs:
-  notify-windsurf:
-    runs-on: ubuntu-latest
-    steps:
-      # - name: Dispatch to WindSurf
-      #   run: |
-      #     curl -X POST ${{ secrets.WINDSURF_SYNC_URL }} \
-      #       -H "x-token:${{ secrets.WINDSURF_TOKEN }}" \
-      #       -d '{"ref":"${{ github.sha }}"}'
-      #
-      # Temporarily disabled: This step notifies WindSurf AI of frontend changes, but requires a valid WINDSURF_SYNC_URL secret and endpoint.
-      # Uncomment and configure when ready for integration.
+# jobs:
+#   notify-windsurf:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Dispatch to WindSurf
+#         run: |
+#           curl -X POST ${{ secrets.WINDSURF_SYNC_URL }} \
+#             -H "x-token:${{ secrets.WINDSURF_TOKEN }}" \
+#             -d '{"ref":"${{ github.sha }}"}'
+#       # Temporarily disabled: Uncomment and configure when ready for integration.
