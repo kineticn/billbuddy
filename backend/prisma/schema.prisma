@@ -1,0 +1,76 @@
+// Prisma schema for BillBuddy
+// Run: npx prisma generate && npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  password     String
+  householdId  String?
+  role         String   @default("user")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  households   Household[] @relation("UserHouseholds")
+}
+
+model Household {
+  id          String   @id @default(uuid())
+  name        String
+  type        String   @default("home")
+  role        String   @default("owner")
+  totalMonthlyOutflow Float  @default(0)
+  upcomingJointBills  Int    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  members     User[]   @relation("UserHouseholds")
+  bills       Bill[]
+}
+
+model Bill {
+  id          String   @id @default(uuid())
+  billerName  String
+  amount      Float
+  dueDate     DateTime
+  status      String   @default("upcoming")
+  category    String?
+  isRecurring Boolean  @default(false)
+  predictedAmount Float?
+  household   Household @relation(fields: [householdId], references: [id])
+  householdId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ComplianceStatus {
+  id        String   @id @default(uuid())
+  status    String
+  updatedAt DateTime @default(now())
+}
+
+model RiskFlag {
+  id          String   @id @default(uuid())
+  userId      String
+  userName    String
+  type        String
+  category    String
+  title       String
+  description String
+  severity    Int
+  status      String
+  createdAt   DateTime @default(now())
+  resolvedAt  DateTime?
+}
+
+model WebhookStatus {
+  id          String   @id @default(uuid())
+  status      String
+  lastChecked DateTime @default(now())
+}

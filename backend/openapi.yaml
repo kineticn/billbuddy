@@ -1,0 +1,502 @@
+openapi: 3.0.3
+info:
+  title: BillBuddy Backend API
+  version: 1.0.0
+  description: |
+    API documentation for BillBuddy backend. All endpoints require authentication unless otherwise noted.
+servers:
+  - url: http://localhost:3001/api/v1
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User registered
+        '400':
+          description: Validation error
+  /auth/login:
+    post:
+      summary: Login and get JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: JWT token
+        '400':
+          description: Invalid credentials
+  /users/profile:
+    get:
+      summary: Get current user's profile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User profile
+        '401':
+          description: Unauthorized
+  /households:
+    get:
+      summary: List households
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of households
+    post:
+      summary: Create a household
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Household created
+  /households/{id}:
+    get:
+      summary: Get a household by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Household
+        '404':
+          description: Not found
+    put:
+      summary: Update a household
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Household updated
+    delete:
+      summary: Delete a household
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Household deleted
+  /bills:
+    get:
+      summary: List bills
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: householdId
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of bills
+    post:
+      summary: Create a bill
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - billerName
+                - amount
+                - dueDate
+                - householdId
+              properties:
+                billerName:
+                  type: string
+                amount:
+                  type: number
+                dueDate:
+                  type: string
+                  format: date-time
+                status:
+                  type: string
+                category:
+                  type: string
+                isRecurring:
+                  type: boolean
+                predictedAmount:
+                  type: number
+                householdId:
+                  type: string
+      responses:
+        '201':
+          description: Bill created
+  /bills/{id}:
+    get:
+      summary: Get a bill by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bill
+        '404':
+          description: Not found
+    put:
+      summary: Update a bill
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                billerName:
+                  type: string
+                amount:
+                  type: number
+                dueDate:
+                  type: string
+                  format: date-time
+                status:
+                  type: string
+                category:
+                  type: string
+                isRecurring:
+                  type: boolean
+                predictedAmount:
+                  type: number
+      responses:
+        '200':
+          description: Bill updated
+    delete:
+      summary: Delete a bill
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bill deleted
+  /admin/compliance:
+    get:
+      summary: List compliance statuses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of compliance statuses
+    post:
+      summary: Create a compliance status
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Compliance status created
+  /admin/compliance/{id}:
+    put:
+      summary: Update a compliance status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Compliance status updated
+    delete:
+      summary: Delete a compliance status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Compliance status deleted
+  /admin/risks:
+    get:
+      summary: List risk flags
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+        - in: query
+          name: type
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of risk flags
+    post:
+      summary: Create a risk flag
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - userName
+                - type
+                - category
+                - title
+                - description
+                - severity
+                - status
+              properties:
+                userId:
+                  type: string
+                userName:
+                  type: string
+                type:
+                  type: string
+                category:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                severity:
+                  type: integer
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Risk flag created
+  /admin/risks/{id}:
+    put:
+      summary: Update a risk flag
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                resolvedAt:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Risk flag updated
+    delete:
+      summary: Delete a risk flag
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Risk flag deleted
+  /admin/webhooks:
+    get:
+      summary: List webhook statuses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of webhook statuses
+    post:
+      summary: Create a webhook status
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Webhook status created
+  /admin/webhooks/{id}:
+    put:
+      summary: Update a webhook status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                lastChecked:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Webhook status updated
+    delete:
+      summary: Delete a webhook status
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Webhook status deleted
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
