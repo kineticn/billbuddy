@@ -87,4 +87,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend-jest-results
-          path: billbuddy/backend/jest-results.json
+          path: backend/jest-results.json
