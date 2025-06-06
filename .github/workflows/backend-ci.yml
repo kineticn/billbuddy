@@ -68,7 +68,7 @@ jobs:
       - name: Run tests with coverage
         run: |
           cd backend
-          npx jest --runInBand --coverage --outputFile=jest-results.json --json
+          npm run test:ci
 
       - name: Upload Jest Coverage
         uses: actions/upload-artifact@v4

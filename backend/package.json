@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test:ci": "node src/index.js & sleep 5 && jest --runInBand --coverage --outputFile=jest-results.json --json"
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
