@@ -1,12 +1,17 @@
-export default {
-  env: {
-    browser: true,
-    es2021: true,
+export default [
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+      },
+    },
+    rules: {
+      // Add your custom rules here
+    },
   },
-  extends: ['eslint:recommended'],
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  rules: {},
-};
+];
