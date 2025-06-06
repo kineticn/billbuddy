@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test:ci": "start-server-and-test start http://localhost:3001 'jest --runInBand --coverage --outputFile=jest-results.json --json'"
+    "test:ci": "start-server-and-test start http://localhost:3001/healthz 'jest --runInBand --coverage --outputFile=jest-results.json --json'"
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
