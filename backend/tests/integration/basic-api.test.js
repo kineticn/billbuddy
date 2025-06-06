@@ -5,6 +5,19 @@ const jwt = require('jsonwebtoken');
 const TEST_JWT = process.env.TEST_JWT ||
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc4YTA2NzVmLTE5ZDAtNDc3YS1hMDFlLTFlMWM5OWE4MzE5NiIsInVzZXJuYW1lIjoiYWxpY2UiLCJob3VzZWhvbGRJZCI6ImhvdXNlMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ5MTY3MTY4LCJleHAiOjE3NDkxNzA3Njh9.UeKcAyHR_R4c2QlutR4G7Me9XCL6Vzb6-Phw2bP9Ghk';
 
+// Generate a test admin JWT for admin endpoints
+const ADMIN_JWT = jwt.sign(
+  {
+    id: "admin-test-id",
+    username: "adminuser",
+    householdId: "adminhouse",
+    role: "admin"
+  },
+  process.env.JWT_SECRET || 'testsecret',
+  { expiresIn: '1h' }
+);
+
+
 describe('BillBuddy API Integration', () => {
   it('should return 200 and health status', async () => {
     const res = await request('http://localhost:3001').get('/healthz');
@@ -20,7 +33,7 @@ describe('BillBuddy API Integration', () => {
   it('should list compliance statuses with auth', async () => {
     const res = await request('http://localhost:3001')
       .get('/api/v1/admin/compliance')
-      .set('Authorization', `Bearer ${TEST_JWT}`);
+      .set('Authorization', `Bearer ${ADMIN_JWT}`);
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body.data)).toBe(true);
   });
