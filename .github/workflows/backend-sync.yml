@@ -7,8 +7,11 @@ jobs:
   notify-windsurf:
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch to WindSurf
-        run: |
-          curl -X POST ${{ secrets.WINDSURF_SYNC_URL }} \
-            -H "x-token:${{ secrets.WINDSURF_TOKEN }}" \
-            -d '{"ref":"${{ github.sha }}"}'
+      # - name: Dispatch to WindSurf
+      #   run: |
+      #     curl -X POST ${{ secrets.WINDSURF_SYNC_URL }} \
+      #       -H "x-token:${{ secrets.WINDSURF_TOKEN }}" \
+      #       -d '{"ref":"${{ github.sha }}"}'
+      #
+      # Temporarily disabled: This step notifies WindSurf AI of frontend changes, but requires a valid WINDSURF_SYNC_URL secret and endpoint.
+      # Uncomment and configure when ready for integration.
