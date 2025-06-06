@@ -38,3 +38,5 @@ This folder is dedicated to all UI/UX work for the BillBuddy project, including:
 **If you have exported code or assets from Builder.io, place them in this folder or subfolders as appropriate.**
 
 <!-- CI trigger -->
+
+<!-- CI/CD trigger for coverage test -->
