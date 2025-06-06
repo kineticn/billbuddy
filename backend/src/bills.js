@@ -1,3 +1,4 @@
+// Trivial comment to trigger Codecov backend coverage visibility test
 const express = require('express');
 const { authenticate } = require('./auth');
 const { households } = require('./households');
