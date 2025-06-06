@@ -1,0 +1,83 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'billbuddy/backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    paths:
+      - 'billbuddy/backend/**'
+      - '.github/workflows/backend-ci.yml'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: bbuser
+          POSTGRES_PASSWORD: bbpass
+          POSTGRES_DB: billbuddy_test
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U bbuser" --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgresql://bbuser:bbpass@localhost:5433/billbuddy_test
+      JWT_SECRET: testsecret
+      PORT: 3001
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
+          cd billbuddy/backend
+          npm ci
+
+      - name: Generate Prisma client
+        run: |
+          cd billbuddy/backend
+          npx prisma generate
+
+      - name: Run Prisma migrations
+        run: |
+          cd billbuddy/backend
+          npx prisma migrate deploy
+
+      - name: Run lint
+        run: |
+          cd billbuddy/backend
+          npx eslint .
+
+      - name: Run tests with coverage
+        run: |
+          cd billbuddy/backend
+          npx jest --runInBand --coverage --outputFile=jest-results.json --json
+
+      - name: Upload Jest Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-jest-coverage
+          path: billbuddy/backend/coverage/
+
+      - name: Upload Jest Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-jest-results
+          path: billbuddy/backend/jest-results.json

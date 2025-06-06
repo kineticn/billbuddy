@@ -9,6 +9,13 @@ BillBuddy is a high-trust FinTech application that consolidates and automates ho
 - **CI/CD**: GitHub Actions
 - **AI Orchestration**: WindSurf-AI
 
+## Frontend Source Location
+The frontend (UI/UX, Builder.io logic, and all web client code) is maintained in a separate repository:
+
+👉 [https://github.com/kineticn/Builder-zen-hub](https://github.com/kineticn/Builder-zen-hub)
+
+Please refer to that repository for all UI, Builder.io, and frontend-related logic, as well as frontend CI/CD and documentation.
+
 ## Development Workflow
 - All code changes via PRs; main branch protected by CI
 - AI agents generate, test, and deploy code; developers review and debug

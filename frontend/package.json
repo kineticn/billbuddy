@@ -4,10 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "lint": "echo 'No linter configured yet' && exit 0",
-    "test-golden": "echo 'No golden tests yet' && exit 0"
+    "lint": "eslint .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "vite": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^3.2.2",
+    "eslint": "^9.28.0",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.2"
   }
 }
