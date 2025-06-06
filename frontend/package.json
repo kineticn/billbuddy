@@ -17,6 +17,7 @@
     "jsdom": "^26.1.0",
     "vitest": "^3.2.2"
   },
-  "_ciTrigger": "test"
+  "_ciTrigger": "test",
+  "type": "module"
 }
 
