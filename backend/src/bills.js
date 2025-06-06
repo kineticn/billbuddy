@@ -134,9 +134,7 @@ router.delete('/bills/:id', authenticate, async (req, res) => {
   } catch (err) {
     res.status(500).json(apiError('SERVER_ERROR', 'Failed to delete bill', { error: err.message }));
   }
-  if (idx === -1) return res.status(404).json(apiError('NOT_FOUND', 'Bill not found'));
-  const deleted = bills.splice(idx, 1)[0];
-  res.json(apiSuccess(deleted));
+
 });
 
 module.exports = { billsRouter: router };
